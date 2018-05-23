@@ -24,8 +24,11 @@
         <td><%= loan.piece_of_equipment.user_id %></td>
         <td>
           <a href="/loans/<%= loan.id %>" class="btn btn-primary">Show</a>
-          <a href="/loans/<%= loan.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_loan/<%= loan.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          
+          <% if current_borrower == loan.borrow %>
+            <a href="/loans/<%= loan.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_loan/<%= loan.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
         </td>
       </tr>
       <% end %>

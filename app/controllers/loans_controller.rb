@@ -1,4 +1,14 @@
 class LoansController < ApplicationController
+  before_action :current_borrower_must_be_loan_borrow, :only => [:edit, :update, :destroy]
+
+  def current_borrower_must_be_loan_borrow
+    loan = Loan.find(params[:id])
+
+    unless current_borrower == loan.borrow
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   def index
     @loans = Loan.all
 
