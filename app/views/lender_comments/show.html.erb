@@ -6,10 +6,22 @@
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
       <dt>Lender</dt>
-      <dd><%= @lender_comment.lender_id %></dd>
+      <dd>
+        <% if @lender_comment.lender.present? %>
+          <a href="/lenders/<%= @lender_comment.lender_id %>">
+            <%= @lender_comment.lender.id %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Borrower</dt>
-      <dd><%= @lender_comment.borrower_id %></dd>
+      <dd>
+        <% if @lender_comment.borrower.present? %>
+          <a href="/borrowers/<%= @lender_comment.borrower_id %>">
+            <%= @lender_comment.borrower.created_at %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 

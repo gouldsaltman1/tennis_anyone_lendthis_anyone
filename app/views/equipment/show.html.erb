@@ -9,7 +9,13 @@
       <dd><%= @equipment.user_id %></dd>
 
       <dt>Lender</dt>
-      <dd><%= @equipment.lender_id %></dd>
+      <dd>
+        <% if @equipment.lender.present? %>
+          <a href="/lenders/<%= @equipment.lender_id %>">
+            <%= @equipment.lender.id %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Category</dt>
       <dd><%= @equipment.category %></dd>

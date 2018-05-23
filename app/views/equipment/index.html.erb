@@ -22,7 +22,13 @@
       <% @equipment.each do |equipment| %>
       <tr>
         <td><%= equipment.user_id %></td>
-        <td><%= equipment.lender.id %></td>
+        <td>
+          <% if equipment.lender.present? %>
+            <a href="/lenders/<%= equipment.lender.id %>">
+              <%= equipment.lender.id %>
+            </a>
+          <% end %>
+        </td>
         <td><%= equipment.category %></td>
         <td><%= equipment.price %></td>
         <td><img src='<%= equipment.image %>' class='img-responsive'></td>

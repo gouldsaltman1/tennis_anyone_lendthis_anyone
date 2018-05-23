@@ -16,8 +16,20 @@
 
       <% @lender_comments.each do |lender_comment| %>
       <tr>
-        <td><%= lender_comment.lender.id %></td>
-        <td><%= lender_comment.borrower.created_at %></td>
+        <td>
+          <% if lender_comment.lender.present? %>
+            <a href="/lenders/<%= lender_comment.lender.id %>">
+              <%= lender_comment.lender.id %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if lender_comment.borrower.present? %>
+            <a href="/borrowers/<%= lender_comment.borrower.id %>">
+              <%= lender_comment.borrower.created_at %>
+            </a>
+          <% end %>
+        </td>
         <td>
           <a href="/lender_comments/<%= lender_comment.id %>" class="btn btn-primary">Show</a>
           
