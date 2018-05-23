@@ -1,0 +1,64 @@
+<!-- Validation failure messages -->
+<% if @loan.errors.any? %>
+  <% @loan.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Loan</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_loan" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for borrow_id -->
+      <div class="form-group">
+        <label for="borrow_id" class="control-label">
+          Borrow
+        </label>
+
+        <input type="text" id="borrow_id" name="borrow_id" placeholder="Borrow" class="form-control" value="<%= @loan.borrow_id %>">
+      </div>
+
+      <!-- Label and input for lender_id -->
+      <div class="form-group">
+        <label for="lender_id" class="control-label">
+          Lender
+        </label>
+
+        <input type="text" id="lender_id" name="lender_id" placeholder="Lender" class="form-control" value="<%= @loan.lender_id %>">
+      </div>
+
+      <!-- Label and input for borrower_lender_equipment -->
+      <div class="form-group">
+        <label for="borrower_lender_equipment" class="control-label">
+          Borrower lender equipment
+        </label>
+
+        <input type="text" id="borrower_lender_equipment" name="borrower_lender_equipment" placeholder="Borrower lender equipment" class="form-control" value="<%= @loan.borrower_lender_equipment %>">
+      </div>
+
+      <!-- Label and input for equipment_id -->
+      <div class="form-group">
+        <label for="equipment_id" class="control-label">
+          Equipment
+        </label>
+
+        <input type="text" id="equipment_id" name="equipment_id" placeholder="Equipment" class="form-control" value="<%= @loan.equipment_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Loan
+      </button>
+      or
+      <a href="/loans">Cancel</a>
+    </form>
+  </div>
+</div>
