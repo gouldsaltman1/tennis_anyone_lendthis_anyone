@@ -1,0 +1,91 @@
+<!-- Validation failure messages -->
+<% if @equipment.errors.any? %>
+  <% @equipment.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Equipment</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_equipment" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @equipment.user_id %>">
+      </div>
+
+      <!-- Label and input for lender_id -->
+      <div class="form-group">
+        <label for="lender_id" class="control-label">
+          Lender
+        </label>
+
+        <input type="text" id="lender_id" name="lender_id" placeholder="Lender" class="form-control" value="<%= @equipment.lender_id %>">
+      </div>
+
+      <!-- Label and input for category -->
+      <div class="form-group">
+        <label for="category" class="control-label">
+          Category
+        </label>
+
+        <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @equipment.category %>">
+      </div>
+
+      <!-- Label and input for price -->
+      <div class="form-group">
+        <label for="price" class="control-label">
+          Price
+        </label>
+
+        <input type="text" id="price" name="price" placeholder="Price" class="form-control" value="<%= @equipment.price %>">
+      </div>
+
+      <!-- Label and input for image -->
+      <div class="form-group">
+        <label for="image" class="control-label">
+          Image
+        </label>
+
+        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @equipment.image %>">
+      </div>
+
+      <!-- Label and input for time_available_start -->
+      <div class="form-group">
+        <label for="time_available_start" class="control-label">
+          Time available start
+        </label>
+
+        <input type="text" id="time_available_start" name="time_available_start" placeholder="Time available start" class="form-control" value="<%= @equipment.time_available_start %>">
+      </div>
+
+      <!-- Label and input for time_available_end -->
+      <div class="form-group">
+        <label for="time_available_end" class="control-label">
+          Time available end
+        </label>
+
+        <input type="text" id="time_available_end" name="time_available_end" placeholder="Time available end" class="form-control" value="<%= @equipment.time_available_end %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Equipment
+      </button>
+      or
+      <a href="/equipment">Cancel</a>
+    </form>
+  </div>
+</div>
