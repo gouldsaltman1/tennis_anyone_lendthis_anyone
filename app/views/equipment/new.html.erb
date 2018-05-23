@@ -33,7 +33,7 @@
           Lender
         </label>
 
-        <input type="text" id="lender_id" name="lender_id" placeholder="Lender" class="form-control" value="<%= @equipment.lender_id %>">
+        <%= select_tag(:lender_id, options_from_collection_for_select(Lender.all, :id, :id, @equipment.lender_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for category -->
