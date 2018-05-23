@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Lender_comment resource:
+  # CREATE
+  get "/lender_comments/new", :controller => "lender_comments", :action => "new"
+  post "/create_lender_comment", :controller => "lender_comments", :action => "create"
+
+  # READ
+  get "/lender_comments", :controller => "lender_comments", :action => "index"
+  get "/lender_comments/:id", :controller => "lender_comments", :action => "show"
+
+  # UPDATE
+  get "/lender_comments/:id/edit", :controller => "lender_comments", :action => "edit"
+  post "/update_lender_comment/:id", :controller => "lender_comments", :action => "update"
+
+  # DELETE
+  get "/delete_lender_comment/:id", :controller => "lender_comments", :action => "destroy"
+  #------------------------------
+
   # Routes for the Equipment_comment resource:
   # CREATE
   get "/equipment_comments/new", :controller => "equipment_comments", :action => "new"

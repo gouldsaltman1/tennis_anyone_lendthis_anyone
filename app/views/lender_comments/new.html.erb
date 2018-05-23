@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @lender_comment.errors.any? %>
+  <% @lender_comment.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Lender Comment</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_lender_comment" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for lender_id -->
+      <div class="form-group">
+        <label for="lender_id" class="control-label">
+          Lender
+        </label>
+
+        <input type="text" id="lender_id" name="lender_id" placeholder="Lender" class="form-control" value="<%= @lender_comment.lender_id %>">
+      </div>
+
+      <!-- Label and input for borrower_id -->
+      <div class="form-group">
+        <label for="borrower_id" class="control-label">
+          Borrower
+        </label>
+
+        <input type="text" id="borrower_id" name="borrower_id" placeholder="Borrower" class="form-control" value="<%= @lender_comment.borrower_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Lender Comment
+      </button>
+      or
+      <a href="/lender_comments">Cancel</a>
+    </form>
+  </div>
+</div>
