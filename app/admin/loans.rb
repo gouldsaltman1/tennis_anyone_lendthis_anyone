@@ -1,4 +1,6 @@
 ActiveAdmin.register Loan do
+
+ permit_params :borrow_id, :lender_id, :borrower_lender_equipment, :equipment_id
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
