@@ -1,6 +1,9 @@
 class Borrower < ApplicationRecord
   # Direct associations
 
+  has_many   :equipment_comments,
+             :dependent => :destroy
+
   has_many   :loans,
              :foreign_key => "borrow_id",
              :dependent => :destroy
