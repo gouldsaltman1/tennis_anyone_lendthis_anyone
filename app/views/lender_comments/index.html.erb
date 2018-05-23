@@ -16,7 +16,7 @@
 
       <% @lender_comments.each do |lender_comment| %>
       <tr>
-        <td><%= lender_comment.lender_id %></td>
+        <td><%= lender_comment.lender.id %></td>
         <td><%= lender_comment.borrower_id %></td>
         <td>
           <a href="/lender_comments/<%= lender_comment.id %>" class="btn btn-primary">Show</a>
