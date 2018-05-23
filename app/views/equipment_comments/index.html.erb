@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>
+    Equipment comments
+    <a href="/equipment_comments/new" class="btn btn-lg btn-success">New Equipment comment</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Equipment</th>
+        <th>Borrower</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @equipment_comments.each do |equipment_comment| %>
+      <tr>
+        <td><%= equipment_comment.equipment_id %></td>
+        <td><%= equipment_comment.borrower_id %></td>
+        <td>
+          <a href="/equipment_comments/<%= equipment_comment.id %>" class="btn btn-primary">Show</a>
+          <a href="/equipment_comments/<%= equipment_comment.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_equipment_comment/<%= equipment_comment.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h3>Equipment Comment #<%= @equipment_comment.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Equipment</dt>
+      <dd><%= @equipment_comment.equipment_id %></dd>
+
+      <dt>Borrower</dt>
+      <dd><%= @equipment_comment.borrower_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/equipment_comments" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/equipment_comments/<%= @equipment_comment.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_equipment_comment/<%= @equipment_comment.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

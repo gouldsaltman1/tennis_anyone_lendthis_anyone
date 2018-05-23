@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Equipment_comment resource:
+  # CREATE
+  get "/equipment_comments/new", :controller => "equipment_comments", :action => "new"
+  post "/create_equipment_comment", :controller => "equipment_comments", :action => "create"
+
+  # READ
+  get "/equipment_comments", :controller => "equipment_comments", :action => "index"
+  get "/equipment_comments/:id", :controller => "equipment_comments", :action => "show"
+
+  # UPDATE
+  get "/equipment_comments/:id/edit", :controller => "equipment_comments", :action => "edit"
+  post "/update_equipment_comment/:id", :controller => "equipment_comments", :action => "update"
+
+  # DELETE
+  get "/delete_equipment_comment/:id", :controller => "equipment_comments", :action => "destroy"
+  #------------------------------
+
   # Routes for the Equipment resource:
   # CREATE
   get "/equipment/new", :controller => "equipment", :action => "new"
