@@ -29,3 +29,96 @@
     </div>
   </div>
 </div>
+
+<!-- A Borrower has many loans -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Loans
+      </li>
+
+      <% @borrower.loans.each do |loan| %>
+        <li class="list-group-item">
+          <a href="/loans/<%= loan.id %>">
+            <%= loan.borrow_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/loans/<%= loan.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/loans/<%= loan.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_loan/<%= loan.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A Borrower has many equipment_comments -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Equipment Comments
+      </li>
+
+      <% @borrower.equipment_comments.each do |equipment_comment| %>
+        <li class="list-group-item">
+          <a href="/equipment_comments/<%= equipment_comment.id %>">
+            <%= equipment_comment.equipment_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/equipment_comments/<%= equipment_comment.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/equipment_comments/<%= equipment_comment.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_equipment_comment/<%= equipment_comment.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A Borrower has many lender_comments -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Lender Comments
+      </li>
+
+      <% @borrower.lender_comments.each do |lender_comment| %>
+        <li class="list-group-item">
+          <a href="/lender_comments/<%= lender_comment.id %>">
+            <%= lender_comment.lender_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/lender_comments/<%= lender_comment.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/lender_comments/<%= lender_comment.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_lender_comment/<%= lender_comment.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
