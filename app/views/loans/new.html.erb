@@ -51,7 +51,7 @@
           Equipment
         </label>
 
-        <input type="text" id="equipment_id" name="equipment_id" placeholder="Equipment" class="form-control" value="<%= @loan.equipment_id %>">
+        <%= select_tag(:equipment_id, options_from_collection_for_select(Equipment.all, :id, :user_id, @loan.equipment_id), :class => "form-control") %>
       </div>
 
       <button class="btn btn-success">
