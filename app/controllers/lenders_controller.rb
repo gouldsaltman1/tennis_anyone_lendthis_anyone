@@ -1,6 +1,11 @@
 class LendersController < ApplicationController
   def index
     @lenders = Lender.all
+    @location_hash = Gmaps4rails.build_markers(@lenders.where.not(:address_latitude => nil)) do |lender, marker|
+      marker.lat lender.address_latitude
+      marker.lng lender.address_longitude
+      marker.infowindow "<h5><a href='/lenders/#{lender.id}'>#{lender.id}</a></h5><small>#{lender.address_formatted_address}</small>"
+    end
 
     render("lenders/index.html.erb")
   end
