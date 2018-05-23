@@ -24,7 +24,7 @@
           Lender
         </label>
 
-        <input type="text" id="lender_id" name="lender_id" placeholder="Lender" class="form-control" value="<%= @lender_comment.lender_id %>">
+        <%= select_tag(:lender_id, options_from_collection_for_select(Lender.all, :id, :id, @lender_comment.lender_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for borrower_id -->
