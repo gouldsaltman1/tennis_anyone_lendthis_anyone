@@ -24,7 +24,7 @@
           Borrow
         </label>
 
-        <input type="text" id="borrow_id" name="borrow_id" placeholder="Borrow" class="form-control" value="<%= @loan.borrow_id %>">
+        <%= select_tag(:borrow_id, options_from_collection_for_select(Borrower.all, :id, :created_at, @loan.borrow_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for lender_id -->
