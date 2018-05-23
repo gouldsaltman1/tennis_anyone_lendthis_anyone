@@ -21,7 +21,7 @@
         <td><%= loan.borrow.created_at %></td>
         <td><%= loan.lender_id %></td>
         <td><%= loan.borrower_lender_equipment %></td>
-        <td><%= loan.equipment_id %></td>
+        <td><%= loan.piece_of_equipment.user_id %></td>
         <td>
           <a href="/loans/<%= loan.id %>" class="btn btn-primary">Show</a>
           <a href="/loans/<%= loan.id %>/edit" class="btn btn-warning">Edit</a>
