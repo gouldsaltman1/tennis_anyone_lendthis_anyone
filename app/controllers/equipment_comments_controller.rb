@@ -1,6 +1,7 @@
 class EquipmentCommentsController < ApplicationController
   def index
-    @equipment_comments = EquipmentComment.page(params[:page]).per(10)
+    @q = EquipmentComment.ransack(params[:q])
+    @equipment_comments = @q.result(:distinct => true).includes(:borrower, :piece_of_equipment).page(params[:page]).per(10)
 
     render("equipment_comments/index.html.erb")
   end

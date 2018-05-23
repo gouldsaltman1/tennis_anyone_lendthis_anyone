@@ -3,6 +3,128 @@
     Loans
     <a href="/loans/new" class="btn btn-lg btn-success">New Loan</a>
   </h1>
+</div><div class="row mb-1">
+  <div class="col-md-12">
+    <%= search_form_for @q, :class => collapse_search_form, :id => "loans_filters" do |f| %>
+      <p class="lead">Narrow results:</p>
+
+        <div class="form-group">
+    <%= f.label :borrower_lender_equipment_cont, "Borrower lender equipment contains" %>
+    <%= f.text_field :borrower_lender_equipment_cont, :class => "form-control", :placeholder => "Borrower lender equipment contains" %>
+  </div>
+
+<div class="form-group">
+  <%= f.label :lender_id, "Lender" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :lender_id_gteq, :class => "form-control", :placeholder => "Lender greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :lender_id_lteq, :class => "form-control", :placeholder => "Lender less than or equal to" %>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+          <%= f.label :created_at, "Created at" %>
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='created_atgteqPicker'>
+                  <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='created_atlteqPicker'>
+                  <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#created_atgteqPicker').datetimepicker({
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#created_atlteqPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#created_atgteqPicker').on("dp.change", function (e) {
+                  $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#created_atlteqPicker').on("dp.change", function (e) {
+                  $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+        <div class="form-group">
+          <%= f.label :created_at, "Borrower Created at" %>
+          <div class="row">
+            <div class='col-md-6 mb-1'>
+              <div class='input-group date' id='borrowgteqcreated_atPicker'>
+                  <%= f.text_field :borrow_created_at_gteq, :class => "form-control", :placeholder => "Borrower Created at greater than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+
+            <div class='col-md-6'>
+              <div class='input-group date' id='borrowlteqcreated_atPicker'>
+                  <%= f.text_field :borrow_created_at_lteq, :class => "form-control", :placeholder => "Borrower Created at less than or equal to" %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#borrowgteqcreated_atPicker').datetimepicker({
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#borrowlteqcreated_atPicker').datetimepicker({
+                  useCurrent: false,
+                  format: 'YYYY-MM-DD hh:mm:SS'
+              });
+              $('#borrowgteqcreated_atPicker').on("dp.change", function (e) {
+                  $('#borrowlteqcreated_atPicker').data("DateTimePicker").minDate(e.date);
+              });
+              $('#borrowlteqcreated_atPicker').on("dp.change", function (e) {
+                  $('#borrowgteqcreated_atPicker').data("DateTimePicker").maxDate(e.date);
+              });
+          });
+      </script>
+
+<div class="form-group">
+  <%= f.label :user_id, "Equipment User" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :piece_of_equipment_user_id_gteq, :class => "form-control", :placeholder => "Equipment User greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :piece_of_equipment_user_id_lteq, :class => "form-control", :placeholder => "Equipment User less than or equal to" %>
+    </div>
+  </div>
+</div>
+
+      <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+
+      <a href="/loans" class="btn btn-default btn-block mb-1">Clear filters</a>
+    <% end %>
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#loans_filters">
+      Show Filters
+    </a>
+  </div>
 </div>
 
 <div class="row">

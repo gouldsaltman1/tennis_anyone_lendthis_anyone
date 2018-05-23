@@ -1,6 +1,7 @@
 class EquipmentController < ApplicationController
   def index
-    @equipment = Equipment.page(params[:page]).per(10)
+    @q = Equipment.ransack(params[:q])
+    @equipment = @q.result(:distinct => true).includes(:lender, :equipment_comments, :loans).page(params[:page]).per(10)
 
     render("equipment/index.html.erb")
   end
