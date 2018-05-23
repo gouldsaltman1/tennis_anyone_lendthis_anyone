@@ -1,0 +1,34 @@
+<div class="page-header">
+  <h1>
+    Borrowers
+    <a href="/borrowers/new" class="btn btn-lg btn-success">New Borrower</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @borrowers.each do |borrower| %>
+      <tr>
+        <td><%= borrower.first_name %></td>
+        <td><%= borrower.last_name %></td>
+        <td><%= borrower.address %></td>
+        <td><%= borrower.email %></td>
+        <td><%= borrower.password %></td>
+        <td>
+          <a href="/borrowers/<%= borrower.id %>" class="btn btn-primary">Show</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
