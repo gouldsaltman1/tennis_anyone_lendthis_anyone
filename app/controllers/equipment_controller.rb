@@ -6,6 +6,8 @@ class EquipmentController < ApplicationController
   end
 
   def show
+    @loan = Loan.new
+    @equipment_comment = EquipmentComment.new
     @equipment = Equipment.find(params[:id])
 
     render("equipment/show.html.erb")
