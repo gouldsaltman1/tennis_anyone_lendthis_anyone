@@ -1,6 +1,10 @@
 class Borrower < ApplicationRecord
   # Direct associations
 
+  has_many   :loans,
+             :foreign_key => "borrow_id",
+             :dependent => :destroy
+
   # Indirect associations
 
   # Validations
