@@ -1,6 +1,6 @@
 class EquipmentCommentsController < ApplicationController
   def index
-    @equipment_comments = EquipmentComment.all
+    @equipment_comments = EquipmentComment.page(params[:page]).per(10)
 
     render("equipment_comments/index.html.erb")
   end

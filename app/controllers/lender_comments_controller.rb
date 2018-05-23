@@ -10,7 +10,7 @@ class LenderCommentsController < ApplicationController
   end
 
   def index
-    @lender_comments = LenderComment.all
+    @lender_comments = LenderComment.page(params[:page]).per(10)
 
     render("lender_comments/index.html.erb")
   end

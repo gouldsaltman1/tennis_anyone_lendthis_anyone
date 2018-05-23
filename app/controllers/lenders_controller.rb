@@ -1,6 +1,6 @@
 class LendersController < ApplicationController
   def index
-    @lenders = Lender.all
+    @lenders = Lender.page(params[:page]).per(10)
     @location_hash = Gmaps4rails.build_markers(@lenders.where.not(:address_latitude => nil)) do |lender, marker|
       marker.lat lender.address_latitude
       marker.lng lender.address_longitude
