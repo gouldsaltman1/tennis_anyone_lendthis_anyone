@@ -22,7 +22,7 @@
       <% @equipment.each do |equipment| %>
       <tr>
         <td><%= equipment.user_id %></td>
-        <td><%= equipment.lender_id %></td>
+        <td><%= equipment.lender.id %></td>
         <td><%= equipment.category %></td>
         <td><%= equipment.price %></td>
         <td><%= equipment.image %></td>
