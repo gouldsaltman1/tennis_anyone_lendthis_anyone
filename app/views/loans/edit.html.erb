@@ -18,14 +18,8 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for borrow_id -->
-      <div class="form-group">
-        <label for="borrow_id" class="control-label">
-          Borrow
-        </label>
-
-        <%= select_tag(:borrow_id, options_from_collection_for_select(Borrower.all, :id, :created_at, @loan.borrow_id), :class => "form-control") %>
-      </div>
+      
+      
 
       <!-- Label and input for lender_id -->
       <div class="form-group">

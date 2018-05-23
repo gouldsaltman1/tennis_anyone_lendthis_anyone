@@ -49,8 +49,6 @@ class LoansController < ApplicationController
 
   def update
     @loan = Loan.find(params[:id])
-
-    @loan.borrow_id = params[:borrow_id]
     @loan.lender_id = params[:lender_id]
     @loan.borrower_lender_equipment = params[:borrower_lender_equipment]
     @loan.equipment_id = params[:equipment_id]
