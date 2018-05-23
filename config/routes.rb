@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "loans#index"
   # Routes for the Lender_comment resource:
   # CREATE
   get "/lender_comments/new", :controller => "lender_comments", :action => "new"
