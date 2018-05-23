@@ -11,6 +11,10 @@ class Loan < ApplicationRecord
 
   # Indirect associations
 
+  has_one    :lender,
+             :through => :piece_of_equipment,
+             :source => :lender
+
   # Validations
 
 end

@@ -9,6 +9,10 @@ class Lender < ApplicationRecord
 
   # Indirect associations
 
+  has_many   :loans,
+             :through => :equipment,
+             :source => :loans
+
   # Validations
 
 end
