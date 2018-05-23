@@ -1,6 +1,9 @@
 class Borrower < ApplicationRecord
   # Direct associations
 
+  has_many   :lender_comments,
+             :dependent => :destroy
+
   has_many   :equipment_comments,
              :dependent => :destroy
 
