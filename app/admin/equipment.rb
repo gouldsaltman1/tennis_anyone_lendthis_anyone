@@ -1,6 +1,6 @@
 ActiveAdmin.register Equipment do
 
- permit_params :user_id, :lender_id, :category, :price, :image, :time_available_start, :time_available_end
+ permit_params :user_id, :lender_id, :price, :image, :time_available_start, :time_available_end, :equipment_category_id, :name
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

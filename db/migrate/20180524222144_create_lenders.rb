@@ -1,10 +1,8 @@
 class CreateLenders < ActiveRecord::Migration
   def change
     create_table :lenders do |t|
-      t.string :first_name
-      t.string :last_name
-      t.string :email
-      t.string :address
+      t.string :lending_address
+      t.integer :user_id
 
       t.timestamps
 

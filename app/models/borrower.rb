@@ -1,5 +1,24 @@
 require 'open-uri'
 class Borrower < ApplicationRecord
+  before_validation :geocode_borrowing_address
+
+  def geocode_borrowing_address
+    if self.borrowing_address.present?
+      url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{URI.encode(self.borrowing_address)}"
+
+      raw_data = open(url).read
+
+      parsed_data = JSON.parse(raw_data)
+
+      if parsed_data["results"].present?
+        self.borrowing_address_latitude = parsed_data["results"][0]["geometry"]["location"]["lat"]
+
+        self.borrowing_address_longitude = parsed_data["results"][0]["geometry"]["location"]["lng"]
+
+        self.borrowing_address_formatted_address = parsed_data["results"][0]["formatted_address"]
+      end
+    end
+  end
   before_validation :geocode_address
 
   def geocode_address
@@ -21,6 +40,8 @@ class Borrower < ApplicationRecord
   end
   # Direct associations
 
+  belongs_to :user
+
   has_many   :lender_comments,
              :dependent => :destroy
 
@@ -35,8 +56,4 @@ class Borrower < ApplicationRecord
 
   # Validations
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
 end

@@ -21,6 +21,11 @@
 </div>
 
 <div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
+  </div>
+
+<div class="form-group">
           <%= f.label :time_available_end, "Time available end" %>
           <div class="row">
             <div class='col-md-6 mb-1'>
@@ -106,11 +111,6 @@
   </div>
 
 <div class="form-group">
-    <%= f.label :category_cont, "Category contains" %>
-    <%= f.text_field :category_cont, :class => "form-control", :placeholder => "Category contains" %>
-  </div>
-
-<div class="form-group">
           <%= f.label :created_at, "Created at" %>
           <div class="row">
             <div class='col-md-6 mb-1'>
@@ -150,7 +150,10 @@
           });
       </script>
 
-        
+        <div class="form-group">
+      <%= f.label :equipment_category_category_name_cont, "EquipmentCategory category_name contains" %>
+      <%= f.text_field :equipment_category_category_name_cont, :class => "form-control", :placeholder => "EquipmentCategory category_name contains" %>
+    </div>
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
@@ -168,11 +171,12 @@
       <tr>
         <th>User</th>
         <th>Lender</th>
-        <th>Category</th>
         <th>Price</th>
         <th>Image</th>
         <th>Time available start</th>
         <th>Time available end</th>
+        <th>Equipment category</th>
+        <th>Name</th>
         <th>Actions</th>
       </tr>
 
@@ -186,11 +190,18 @@
             </a>
           <% end %>
         </td>
-        <td><%= equipment.category %></td>
         <td><%= equipment.price %></td>
         <td><img src='<%= equipment.image %>' class='img-responsive'></td>
         <td><%= equipment.time_available_start %></td>
         <td><%= equipment.time_available_end %></td>
+        <td>
+          <% if equipment.equipment_category.present? %>
+            <a href="/equipment_categories/<%= equipment.equipment_category.id %>">
+              <%= equipment.equipment_category.category_name %>
+            </a>
+          <% end %>
+        </td>
+        <td><%= equipment.name %></td>
         <td>
           <a href="/equipment/<%= equipment.id %>" class="btn btn-primary">Show</a>
           <a href="/equipment/<%= equipment.id %>/edit" class="btn btn-warning">Edit</a>

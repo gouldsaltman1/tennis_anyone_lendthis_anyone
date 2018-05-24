@@ -28,7 +28,13 @@
       </div>
 
       <!-- Label and input for borrower_id -->
-      <input type="hidden" name="borrower_id" value="<%= current_borrower.id %>">
+      <div class="form-group">
+        <label for="borrower_id" class="control-label">
+          Borrower
+        </label>
+
+        <%= select_tag(:borrower_id, options_from_collection_for_select(Borrower.all, :id, :created_at, @lender_comment.borrower_id), :class => "form-control") %>
+      </div>
 
       <button class="btn btn-success">
         Create Lender Comment

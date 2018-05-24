@@ -1,0 +1,139 @@
+<div class="page-header">
+  <h3>Equipment Category #<%= @equipment_category.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Category name</dt>
+      <dd><%= @equipment_category.category_name %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/equipment_categories" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/equipment_categories/<%= @equipment_category.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_equipment_category/<%= @equipment_category.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- A Equipment category has many equipments -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Equipments
+      </li>
+
+      <% @equipment_category.equipments.each do |equipment| %>
+        <li class="list-group-item">
+          <a href="/equipment/<%= equipment.id %>">
+            <%= equipment.user_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/equipment/<%= equipment.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/equipment/<%= equipment.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_equipment/<%= equipment.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_equipment" method="post" enctype="multipart/form-data">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for lender_id -->
+      <div class="form-group">
+        <label for="lender_id" class="control-label">
+          Lender
+        </label>
+
+        <%= select_tag(:lender_id, options_from_collection_for_select(Lender.all, :id, :id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for price -->
+      <div class="form-group">
+        <label for="price" class="control-label">
+          Price
+        </label>
+
+        <input type="text" id="price" name="price" placeholder="Price" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for image -->
+      <div class="form-group">
+        <label for="image" class="control-label">
+          Image
+        </label>
+
+        <input type="file" id="image" name="image" class="form-control">
+      </div>
+
+      <!-- Label and input for time_available_start -->
+      <div class="form-group">
+        <label for="time_available_start" class="control-label">
+          Time available start
+        </label>
+
+        <input type="text" id="time_available_start" name="time_available_start" placeholder="Time available start" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for time_available_end -->
+      <div class="form-group">
+        <label for="time_available_end" class="control-label">
+          Time available end
+        </label>
+
+        <input type="text" id="time_available_end" name="time_available_end" placeholder="Time available end" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for equipment_category_id -->
+      <div class="form-group">
+        <label for="equipment_category_id" class="control-label">
+          Equipment category
+        </label>
+
+        <%= select_tag(:equipment_category_id, options_from_collection_for_select(EquipmentCategory.all, :id, :category_name), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="">
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Equipment
+      </button>
+    </form>
+      </li>
+    </ul>
+  </div>
+</div>

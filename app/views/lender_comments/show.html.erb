@@ -29,14 +29,12 @@
       <a href="/lender_comments" class="btn btn-primary">
         Back
       </a>
-      <% if current_borrower == @lender_comment.borrower %>
-        <a href="/lender_comments/<%= @lender_comment.id %>/edit" class="btn btn-warning">
-          Edit
-        </a>
-        <a href="/delete_lender_comment/<%= @lender_comment.id %>" class="btn btn-danger" rel="nofollow">
-          Delete
-        </a>
-      <% end %>
+      <a href="/lender_comments/<%= @lender_comment.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_lender_comment/<%= @lender_comment.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
     </div>
   </div>
 </div>

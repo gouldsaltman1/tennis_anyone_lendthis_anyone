@@ -1,14 +1,4 @@
 class LenderCommentsController < ApplicationController
-  before_action :current_borrower_must_be_lender_comment_borrower, :only => [:edit, :update, :destroy]
-
-  def current_borrower_must_be_lender_comment_borrower
-    lender_comment = LenderComment.find(params[:id])
-
-    unless current_borrower == lender_comment.borrower
-      redirect_to :back, :alert => "You are not authorized for that."
-    end
-  end
-
   def index
     @q = LenderComment.ransack(params[:q])
     @lender_comments = @q.result(:distinct => true).includes(:borrower, :lender).page(params[:page]).per(10)

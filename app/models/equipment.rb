@@ -3,6 +3,8 @@ class Equipment < ApplicationRecord
 
   # Direct associations
 
+  belongs_to :equipment_category
+
   has_many   :loans,
              :dependent => :destroy
 

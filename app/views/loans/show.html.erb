@@ -35,14 +35,12 @@
       <a href="/loans" class="btn btn-primary">
         Back
       </a>
-      <% if current_borrower == @loan.borrow %>
-        <a href="/loans/<%= @loan.id %>/edit" class="btn btn-warning">
-          Edit
-        </a>
-        <a href="/delete_loan/<%= @loan.id %>" class="btn btn-danger" rel="nofollow">
-          Delete
-        </a>
-      <% end %>
+      <a href="/loans/<%= @loan.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_loan/<%= @loan.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
     </div>
   </div>
 </div>

@@ -1,0 +1,49 @@
+<!-- Validation failure messages -->
+<% if @borrower.errors.any? %>
+  <% @borrower.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Borrower #<%= @borrower.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_borrower/<%= @borrower.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for address -->
+      <div class="form-group">
+        <label for="address" class="control-label">
+          Address
+        </label>
+
+        <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<%= @borrower.address %>">
+      </div>
+
+      
+      
+
+      <!-- Label and input for borrowing_address -->
+      <div class="form-group">
+        <label for="borrowing_address" class="control-label">
+          Borrowing address
+        </label>
+
+        <input type="text" id="borrowing_address" name="borrowing_address" placeholder="Borrowing address" class="form-control" value="<%= @borrower.borrowing_address %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Borrower
+      </button>
+      or
+      <a href="/borrowers/<%= @borrower.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

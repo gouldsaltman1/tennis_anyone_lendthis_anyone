@@ -1,6 +1,6 @@
-ActiveAdmin.register Lender do
+ActiveAdmin.register EquipmentCategory do
 
- permit_params :lending_address, :user_id
+ permit_params :category_name
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

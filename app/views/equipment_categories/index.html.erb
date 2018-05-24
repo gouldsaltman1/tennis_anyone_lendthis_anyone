@@ -1,14 +1,19 @@
 <div class="page-header">
   <h1>
-    Lenders
-    <a href="/lenders/new" class="btn btn-lg btn-success">New Lender</a>
+    Equipment categories
+    <a href="/equipment_categories/new" class="btn btn-lg btn-success">New Equipment category</a>
   </h1>
 </div><div class="row mb-1">
   <div class="col-md-12">
-    <%= search_form_for @q, :class => collapse_search_form, :id => "lenders_filters" do |f| %>
+    <%= search_form_for @q, :class => collapse_search_form, :id => "equipment_categories_filters" do |f| %>
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
+    <%= f.label :category_name_cont, "Category name contains" %>
+    <%= f.text_field :category_name_cont, :class => "form-control", :placeholder => "Category name contains" %>
+  </div>
+
+<div class="form-group">
           <%= f.label :created_at, "Created at" %>
           <div class="row">
             <div class='col-md-6 mb-1'>
@@ -52,35 +57,21 @@
   <%= f.label :user_id, "Equipment User" %>
   <div class="row">
     <div class='col-md-6 mb-1'>
-      <%= f.text_field :equipment_user_id_gteq, :class => "form-control", :placeholder => "Equipment User greater than or equal to" %>
+      <%= f.text_field :equipments_user_id_gteq, :class => "form-control", :placeholder => "Equipment User greater than or equal to" %>
     </div>
     <div class='col-md-6'>
-      <%= f.text_field :equipment_user_id_lteq, :class => "form-control", :placeholder => "Equipment User less than or equal to" %>
+      <%= f.text_field :equipments_user_id_lteq, :class => "form-control", :placeholder => "Equipment User less than or equal to" %>
     </div>
   </div>
 </div>
-
-<div class="form-group">
-      <%= f.label :user_email_cont, "User email contains" %>
-      <%= f.text_field :user_email_cont, :class => "form-control", :placeholder => "User email contains" %>
-    </div>
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
-      <a href="/lenders" class="btn btn-default btn-block mb-1">Clear filters</a>
+      <a href="/equipment_categories" class="btn btn-default btn-block mb-1">Clear filters</a>
     <% end %>
-    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#lenders_filters">
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#equipment_categories_filters">
       Show Filters
     </a>
-  </div>
-</div>
-
-
-<div class="row m-b-2">
-  <div class="col-md-12">
-    <div>
-      <div id="location_map" style="height: 480px;"></div>
-    </div>
   </div>
 </div>
 
@@ -88,43 +79,21 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Lending address</th>
-        <th>User</th>
+        <th>Category name</th>
         <th>Actions</th>
       </tr>
 
-      <% @lenders.each do |lender| %>
+      <% @equipment_categories.each do |equipment_category| %>
       <tr>
-        <td><%= lender.lending_address %></td>
+        <td><%= equipment_category.category_name %></td>
         <td>
-          <% if lender.user.present? %>
-            <a href="/users/<%= lender.user.id %>">
-              <%= lender.user.email %>
-            </a>
-          <% end %>
-        </td>
-        <td>
-          <a href="/lenders/<%= lender.id %>" class="btn btn-primary">Show</a>
-          
-          <% if current_user == lender.user %>
-            <a href="/lenders/<%= lender.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_lender/<%= lender.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          <% end %>
+          <a href="/equipment_categories/<%= equipment_category.id %>" class="btn btn-primary">Show</a>
+          <a href="/equipment_categories/<%= equipment_category.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_equipment_category/<%= equipment_category.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
       <% end %>
     </table>
-    <%= paginate @lenders, theme: 'twitter-bootstrap-4' %>
+    <%= paginate @equipment_categories, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>
-
-<script src="//maps.google.com/maps/api/js?v=3.24&key=AIzaSyCOTPWiuvyyo6sKoIBzKA4-1ol-vTOIOlM"></script>
-<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-<script>
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'location_map'}}, function(){
-    markers = handler.addMarkers(<%= raw @location_hash.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  });
-</script>

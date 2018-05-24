@@ -1,7 +1,7 @@
 class EquipmentController < ApplicationController
   def index
     @q = Equipment.ransack(params[:q])
-    @equipment = @q.result(:distinct => true).includes(:lender, :equipment_comments, :loans).page(params[:page]).per(10)
+    @equipment = @q.result(:distinct => true).includes(:lender, :equipment_comments, :loans, :equipment_category).page(params[:page]).per(10)
 
     render("equipment/index.html.erb")
   end
@@ -25,11 +25,12 @@ class EquipmentController < ApplicationController
 
     @equipment.user_id = params[:user_id]
     @equipment.lender_id = params[:lender_id]
-    @equipment.category = params[:category]
     @equipment.price = params[:price]
     @equipment.image = params[:image]
     @equipment.time_available_start = params[:time_available_start]
     @equipment.time_available_end = params[:time_available_end]
+    @equipment.equipment_category_id = params[:equipment_category_id]
+    @equipment.name = params[:name]
 
     save_status = @equipment.save
 
@@ -58,11 +59,12 @@ class EquipmentController < ApplicationController
 
     @equipment.user_id = params[:user_id]
     @equipment.lender_id = params[:lender_id]
-    @equipment.category = params[:category]
     @equipment.price = params[:price]
     @equipment.image = params[:image]
     @equipment.time_available_start = params[:time_available_start]
     @equipment.time_available_end = params[:time_available_end]
+    @equipment.equipment_category_id = params[:equipment_category_id]
+    @equipment.name = params[:name]
 
     save_status = @equipment.save
 

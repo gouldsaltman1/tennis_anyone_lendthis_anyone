@@ -5,20 +5,20 @@
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>First name</dt>
-      <dd><%= @lender.first_name %></dd>
-
-      <dt>Last name</dt>
-      <dd><%= @lender.last_name %></dd>
-
-      <dt>Email</dt>
-      <dd><%= @lender.email %></dd>
-
-      <dt>Address</dt>
+      <dt>Lending address</dt>
       <dd>
         <div>
           <div id="location_map" style="height: 480px;"></div>
         </div>
+      </dd>
+
+      <dt>User</dt>
+      <dd>
+        <% if @lender.user.present? %>
+          <a href="/users/<%= @lender.user_id %>">
+            <%= @lender.user.email %>
+          </a>
+        <% end %>
       </dd>
 
     </dl>
@@ -27,12 +27,14 @@
       <a href="/lenders" class="btn btn-primary">
         Back
       </a>
-      <a href="/lenders/<%= @lender.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_lender/<%= @lender.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+      <% if current_user == @lender.user %>
+        <a href="/lenders/<%= @lender.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_lender/<%= @lender.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      <% end %>
     </div>
   </div>
 </div>
@@ -74,7 +76,13 @@
       <input type="hidden" name="lender_id" value="<%= @lender.id %>">
 
       <!-- Label and input for borrower_id -->
-      <input type="hidden" name="borrower_id" value="<%= current_borrower.id %>">
+      <div class="form-group">
+        <label for="borrower_id" class="control-label">
+          Borrower
+        </label>
+
+        <%= select_tag(:borrower_id, options_from_collection_for_select(Borrower.all, :id, :created_at), :class => "form-control") %>
+      </div>
 
       <button class="btn btn-block btn-success">
         Create Lender Comment
@@ -130,15 +138,6 @@
       <!-- Label and input for lender_id -->
       <input type="hidden" name="lender_id" value="<%= @lender.id %>">
 
-      <!-- Label and input for category -->
-      <div class="form-group">
-        <label for="category" class="control-label">
-          Category
-        </label>
-
-        <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="">
-      </div>
-
       <!-- Label and input for price -->
       <div class="form-group">
         <label for="price" class="control-label">
@@ -173,6 +172,24 @@
         </label>
 
         <input type="text" id="time_available_end" name="time_available_end" placeholder="Time available end" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for equipment_category_id -->
+      <div class="form-group">
+        <label for="equipment_category_id" class="control-label">
+          Equipment category
+        </label>
+
+        <%= select_tag(:equipment_category_id, options_from_collection_for_select(EquipmentCategory.all, :id, :category_name), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="">
       </div>
 
       <button class="btn btn-block btn-success">
@@ -223,9 +240,9 @@
   handler.buildMap({ provider: {}, internal: {id: 'location_map'}}, function(){
     markers = handler.addMarkers([
       {
-        "lat": <%= @lender.address_latitude %>,
-        "lng": <%= @lender.address_longitude %>,
-        "infowindow": "<h5><%= @lender.created_at %></h5><small><%= @lender.address_formatted_address %></small>"
+        "lat": <%= @lender.lending_address_latitude %>,
+        "lng": <%= @lender.lending_address_longitude %>,
+        "infowindow": "<h5><%= @lender.created_at %></h5><small><%= @lender.lending_address_formatted_address %></small>"
       }
     ]);
     handler.bounds.extendWith(markers);
