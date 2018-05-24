@@ -1,0 +1,51 @@
+<div class="page-header">
+  <h1>
+    Users
+    <a href="/users/new" class="btn btn-lg btn-success">New User</a>
+  </h1>
+</div>
+
+
+<div class="row m-b-2">
+  <div class="col-md-12">
+    <div>
+      <div id="location_map" style="height: 480px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Email</th>
+        <th>Password</th>
+        <th>User address</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.password %></td>
+        <td><%= user.user_address %></td>
+        <td>
+          <a href="/users/<%= user.id %>" class="btn btn-primary">Show</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+    <%= paginate @users, theme: 'twitter-bootstrap-4' %>
+  </div>
+</div>
+
+<script src="//maps.google.com/maps/api/js?v=3.24&key=AIzaSyCOTPWiuvyyo6sKoIBzKA4-1ol-vTOIOlM"></script>
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script>
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'location_map'}}, function(){
+    markers = handler.addMarkers(<%= raw @location_hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>

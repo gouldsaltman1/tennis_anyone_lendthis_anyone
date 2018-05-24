@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_borrower!
+  before_action :authenticate_user!
 
   protect_from_forgery with: :exception
 
@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, :keys => [:first_name, :last_name, :address])
+    devise_parameter_sanitizer.permit(:sign_up, :keys => [:user_address])
 
-    devise_parameter_sanitizer.permit(:account_update, :keys => [:first_name, :last_name, :address])
+    devise_parameter_sanitizer.permit(:account_update, :keys => [:user_address])
   end
 end

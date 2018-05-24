@@ -1,6 +1,6 @@
 <!-- Validation failure messages -->
-<% if @lender.errors.any? %>
-  <% @lender.errors.full_messages.each do |message| %>
+<% if @equipment_category.errors.any? %>
+  <% @equipment_category.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <%= message %>
@@ -9,32 +9,29 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Add Lender</h3>
+  <h3>Add Equipment Category</h3>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <form action="/create_lender" method="post">
+    <form action="/create_equipment_category" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for lending_address -->
+      <!-- Label and input for category_name -->
       <div class="form-group">
-        <label for="lending_address" class="control-label">
-          Lending address
+        <label for="category_name" class="control-label">
+          Category name
         </label>
 
-        <input type="text" id="lending_address" name="lending_address" placeholder="Lending address" class="form-control" value="<%= @lender.lending_address %>">
+        <input type="text" id="category_name" name="category_name" placeholder="Category name" class="form-control" value="<%= @equipment_category.category_name %>">
       </div>
 
-      <!-- Label and input for user_id -->
-      <input type="hidden" name="user_id" value="<%= current_user.id %>">
-
       <button class="btn btn-success">
-        Create Lender
+        Create Equipment Category
       </button>
       or
-      <a href="/lenders">Cancel</a>
+      <a href="/equipment_categories">Cancel</a>
     </form>
   </div>
 </div>

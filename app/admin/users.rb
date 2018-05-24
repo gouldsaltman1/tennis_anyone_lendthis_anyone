@@ -1,6 +1,6 @@
-ActiveAdmin.register Lender do
+ActiveAdmin.register User do
 
- permit_params :lending_address, :user_id
+ permit_params :email, :password, :user_address
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

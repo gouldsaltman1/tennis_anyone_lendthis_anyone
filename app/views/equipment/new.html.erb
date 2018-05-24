@@ -36,15 +36,6 @@
         <%= select_tag(:lender_id, options_from_collection_for_select(Lender.all, :id, :id, @equipment.lender_id), :class => "form-control") %>
       </div>
 
-      <!-- Label and input for category -->
-      <div class="form-group">
-        <label for="category" class="control-label">
-          Category
-        </label>
-
-        <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @equipment.category %>">
-      </div>
-
       <!-- Label and input for price -->
       <div class="form-group">
         <label for="price" class="control-label">
@@ -79,6 +70,24 @@
         </label>
 
         <input type="text" id="time_available_end" name="time_available_end" placeholder="Time available end" class="form-control" value="<%= @equipment.time_available_end %>">
+      </div>
+
+      <!-- Label and input for equipment_category_id -->
+      <div class="form-group">
+        <label for="equipment_category_id" class="control-label">
+          Equipment category
+        </label>
+
+        <%= select_tag(:equipment_category_id, options_from_collection_for_select(EquipmentCategory.all, :id, :category_name, @equipment.equipment_category_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @equipment.name %>">
       </div>
 
       <button class="btn btn-success">

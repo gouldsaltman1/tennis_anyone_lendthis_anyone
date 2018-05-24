@@ -1,0 +1,37 @@
+<!-- Validation failure messages -->
+<% if @equipment_category.errors.any? %>
+  <% @equipment_category.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Equipment Category #<%= @equipment_category.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_equipment_category/<%= @equipment_category.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for category_name -->
+      <div class="form-group">
+        <label for="category_name" class="control-label">
+          Category name
+        </label>
+
+        <input type="text" id="category_name" name="category_name" placeholder="Category name" class="form-control" value="<%= @equipment_category.category_name %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Equipment Category
+      </button>
+      or
+      <a href="/equipment_categories/<%= @equipment_category.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

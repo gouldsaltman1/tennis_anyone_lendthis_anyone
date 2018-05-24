@@ -1,11 +1,21 @@
 class LendersController < ApplicationController
+  before_action :current_user_must_be_lender_user, :only => [:edit, :update, :destroy]
+
+  def current_user_must_be_lender_user
+    lender = Lender.find(params[:id])
+
+    unless current_user == lender.user
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   def index
     @q = Lender.ransack(params[:q])
-    @lenders = @q.result(:distinct => true).includes(:lender_comments, :equipment, :loans).page(params[:page]).per(10)
-    @location_hash = Gmaps4rails.build_markers(@lenders.where.not(:address_latitude => nil)) do |lender, marker|
-      marker.lat lender.address_latitude
-      marker.lng lender.address_longitude
-      marker.infowindow "<h5><a href='/lenders/#{lender.id}'>#{lender.id}</a></h5><small>#{lender.address_formatted_address}</small>"
+    @lenders = @q.result(:distinct => true).includes(:lender_comments, :equipment, :user, :loans).page(params[:page]).per(10)
+    @location_hash = Gmaps4rails.build_markers(@lenders.where.not(:lending_address_latitude => nil)) do |lender, marker|
+      marker.lat lender.lending_address_latitude
+      marker.lng lender.lending_address_longitude
+      marker.infowindow "<h5><a href='/lenders/#{lender.id}'>#{lender.id}</a></h5><small>#{lender.lending_address_formatted_address}</small>"
     end
 
     render("lenders/index.html.erb")
@@ -28,10 +38,8 @@ class LendersController < ApplicationController
   def create
     @lender = Lender.new
 
-    @lender.first_name = params[:first_name]
-    @lender.last_name = params[:last_name]
-    @lender.email = params[:email]
-    @lender.address = params[:address]
+    @lender.lending_address = params[:lending_address]
+    @lender.user_id = params[:user_id]
 
     save_status = @lender.save
 
@@ -58,10 +66,8 @@ class LendersController < ApplicationController
   def update
     @lender = Lender.find(params[:id])
 
-    @lender.first_name = params[:first_name]
-    @lender.last_name = params[:last_name]
-    @lender.email = params[:email]
-    @lender.address = params[:address]
+    @lender.lending_address = params[:lending_address]
+    @lender.user_id = params[:user_id]
 
     save_status = @lender.save
 

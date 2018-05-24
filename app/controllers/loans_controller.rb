@@ -1,16 +1,6 @@
 class LoansController < ApplicationController
-  before_action :current_borrower_must_be_loan_borrow, :only => [:edit, :update, :destroy]
-
-  def current_borrower_must_be_loan_borrow
-    loan = Loan.find(params[:id])
-
-    unless current_borrower == loan.borrow
-      redirect_to :back, :alert => "You are not authorized for that."
-    end
-  end
-
   def index
-    @q = current_borrower.loans.ransack(params[:q])
+    @q = Loan.ransack(params[:q])
     @loans = @q.result(:distinct => true).includes(:borrow, :piece_of_equipment, :lender).page(params[:page]).per(10)
 
     render("loans/index.html.erb")
@@ -60,6 +50,8 @@ class LoansController < ApplicationController
 
   def update
     @loan = Loan.find(params[:id])
+
+    @loan.borrow_id = params[:borrow_id]
     @loan.lender_id = params[:lender_id]
     @loan.borrower_lender_equipment = params[:borrower_lender_equipment]
     @loan.equipment_id = params[:equipment_id]

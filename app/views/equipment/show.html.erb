@@ -17,9 +17,6 @@
         <% end %>
       </dd>
 
-      <dt>Category</dt>
-      <dd><%= @equipment.category %></dd>
-
       <dt>Price</dt>
       <dd><%= @equipment.price %></dd>
 
@@ -31,6 +28,18 @@
 
       <dt>Time available end</dt>
       <dd><%= @equipment.time_available_end %></dd>
+
+      <dt>Equipment category</dt>
+      <dd>
+        <% if @equipment.equipment_category.present? %>
+          <a href="/equipment_categories/<%= @equipment.equipment_category_id %>">
+            <%= @equipment.equipment_category.category_name %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>Name</dt>
+      <dd><%= @equipment.name %></dd>
 
     </dl>
 
@@ -136,7 +145,13 @@
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
       <!-- Label and input for borrow_id -->
-      <input type="hidden" name="borrow_id" value="<%= current_borrower.id %>">
+      <div class="form-group">
+        <label for="borrow_id" class="control-label">
+          Borrow
+        </label>
+
+        <%= select_tag(:borrow_id, options_from_collection_for_select(Borrower.all, :id, :created_at), :class => "form-control") %>
+      </div>
 
       <!-- Label and input for lender_id -->
       <div class="form-group">

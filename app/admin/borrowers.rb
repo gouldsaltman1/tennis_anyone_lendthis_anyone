@@ -1,6 +1,6 @@
 ActiveAdmin.register Borrower do
 
- permit_params :first_name, :last_name, :address, :email, :password
+ permit_params :address, :user_id, :borrowing_address
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

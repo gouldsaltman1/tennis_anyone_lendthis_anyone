@@ -3,8 +3,7 @@ class EquipmentComment < ApplicationRecord
 
   belongs_to :piece_of_equipment,
              :class_name => "Equipment",
-             :foreign_key => "equipment_id",
-             :counter_cache => true
+             :foreign_key => "equipment_id"
 
   belongs_to :borrower
 
